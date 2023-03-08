@@ -33,11 +33,15 @@ override val name: String, val contents: List[DirEntry])
     findEntryHelper(entryName, contents)
   }
 
+  def isRoot: Boolean = parentPath.isEmpty
   def replaceEntry(entryName: String, newEntry: DirEntry): Directory =
     new Directory(parentPath, name, contents.filter(e => !e.name.equals(entryName)) :+ newEntry)
 
   def asDirectory: Directory = this
   def asFile: File = throw new FilesystemException("A directory cannot be converted to a file!")
+
+  def isDirectory: Boolean = true
+  def isFile: Boolean = false
   def getType: String = "Directory"
 }
 

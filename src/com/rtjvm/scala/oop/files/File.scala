@@ -11,6 +11,9 @@ extends DirEntry (parentPath, name) {
   def asFile: File = this
   def getType: String = "File"
 
+  override def isDirectory: Boolean = false
+
+  override def isFile: Boolean = true
 }
 
 object File {
