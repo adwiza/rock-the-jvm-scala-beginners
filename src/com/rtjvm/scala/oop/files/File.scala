@@ -9,11 +9,20 @@ extends DirEntry (parentPath, name) {
     throw new FilesystemException("A file cannot be converted to a directory!")
 
   def asFile: File = this
-  def getType: String = "File"
 
   override def isDirectory: Boolean = false
-
   override def isFile: Boolean = true
+
+  def getType: String = "File"
+
+  def setContents(newContents: String): File =
+    new File(parentPath, name, newContents)
+
+  def appendContents(newContents: String): File =
+    setContents(contents + "\n" + newContents)
+
+
+
 }
 
 object File {
